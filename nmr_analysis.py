@@ -22,7 +22,7 @@ QT_DATA_COLUMN_ENTRIES = ['DataNo.', 'Frequency', 'Field(H)', 'Pul.spw', 'Pul.fp
                           'iteration', 'Samplingtime', 'Temp', 'level', 'gain', 'program', 'init_phase']
 
 QT_BASIC_PROCESS_DIC = _get_sorted_dic(
-    {'EchoType': 'Half', 'EchoPosition': 'auto', 'Phase': 'auto', 'PhaseMode': 'echo', 'PhaseFrom': '0 MS',
+    {'Reverse': 'False', 'EchoType': 'Half', 'EchoPosition': 'auto', 'Phase': 'auto', 'PhaseMode': 'echo', 'PhaseFrom': '0 MS',
      'PhaseTo': '0 MS', 'PhaseErrorLimit': 0.01, 'EchoBaseLine': 'False', 'EchoBaseLineFrom': '0 MS',
      'EchoBaseLineTo': '0 MS', 'SpectrumBaseLine': 'False', 'SpectrumBaseLineFrom': '0 HZ',
      'SpectrumBaseLineTo': '0 HZ', 'Cut': 'False', 'CutFrom': '0 MS', 'CutTo': '0 MS'})
@@ -340,7 +340,7 @@ def get_echo_position(data):
 
 def ft_process(ori_dic, ori_data, ori_dic_list):
     dic, data, dic_list = copy.deepcopy((ori_dic, ori_data, ori_dic_list))
-    dic, data = ng.pipe_proc.ft(dic, data)
+    dic, data = ng.pipe_proc.ft(dic, data, neg = bool(ori_dic_list[1]['Reverse'].lower()=='true'))
     return dic, data, dic_list
 
 
